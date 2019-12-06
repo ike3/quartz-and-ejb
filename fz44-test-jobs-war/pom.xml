@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>edu.test</groupId>
+    <artifactId>fz44-test-jobs-war</artifactId>
+    <packaging>war</packaging>
+    <version>develop_wf-SNAPSHOT</version>
+
+    <properties>
+        <file.encoding>UTF-8</file.encoding>
+        <ejb.send.mail.message.remote>ejb:fz44-test-jobs-ear/fz44-test-jobs-ejb/SendMailMessageJob!ru.lanit.fz44.ejb.job.PpaJobRemote</ejb.send.mail.message.remote>
+
+        <job.send.mail.message.name>SEND_MAIL_MESSAGES</job.send.mail.message.name>
+        <job.send.mail.message.enable>true</job.send.mail.message.enable>
+        <job.send.mail.message.revision>1</job.send.mail.message.revision>
+        <job.send.mail.message.ejb>${ejb.send.mail.message.remote}</job.send.mail.message.ejb>
+        <job.send.mail.message.cron>0 */5 * * * ?</job.send.mail.message.cron>
+
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>edu.test</groupId>
+            <artifactId>fz44-test-jobs-ejb-api</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>ejb-api</artifactId>
+            <version>3.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <resourceEncoding>${file.encoding}</resourceEncoding>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                        <resource>
+                            <filtering>true</filtering>
+                            <targetPath>WEB-INF</targetPath>
+                            <directory>src/main/resources/WEB-INF</directory>
+                            <includes>
+                                <include>web.xml</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

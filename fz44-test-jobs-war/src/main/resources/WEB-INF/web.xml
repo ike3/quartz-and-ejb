@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		                     http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+
+    <listener>
+        <listener-class>ru.lanit.fz44.web.jobs.ppa.scheduler.JobsScheduler</listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>ppa.scheduler.name</param-name>
+        <param-value>${jobs.scheduler.name.local}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>job.${job.send.mail.message.name}.enable</param-name>
+        <param-value>${job.send.mail.message.enable}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>job.${job.send.mail.message.name}.revision</param-name>
+        <param-value>${job.send.mail.message.revision}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>job.${job.send.mail.message.name}.ejb</param-name>
+        <param-value>${job.send.mail.message.ejb}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>job.${job.send.mail.message.name}.cron</param-name>
+        <param-value>${job.send.mail.message.cron}</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>JobAdminServlet</servlet-name>
+        <servlet-class>ru.lanit.fz44.web.jobs.ppa.JobAdminServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JobAdminServlet</servlet-name>
+        <url-pattern>/admin/run</url-pattern>
+    </servlet-mapping>
+
+</web-app>

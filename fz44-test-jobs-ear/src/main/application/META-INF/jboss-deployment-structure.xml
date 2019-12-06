@@ -1,0 +1,10 @@
+<jboss-deployment-structure>
+    <deployment>
+        <module-alias name="deployment.fz44-ppa-jobs" />
+        <dependencies>
+            <module name="javaee.api" export="true"/>
+            <module name="javax.annotation.api" export="true"/>
+            <module name="com.oracle" export="true"/>
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>
